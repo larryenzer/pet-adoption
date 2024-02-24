@@ -19,9 +19,13 @@ async function petsArea() {
   const petsData = await petsPromise.json()
   petsData.forEach(pet => {
     const clone = template.content.cloneNode(true)
+    
+    clone.querySelector(".pet-card").dataset.species = pet.species 
+    
     clone.querySelector("h3").textContent = pet.name
     clone.querySelector(".pet-description").textContent = pet.description
     clone.querySelector(".pet-age").textContent = createAgeText(pet.birthYear)
+
     if (!pet.photo) pet.photo = "images/fallback.jpg"
     
     clone.querySelector(".pet-card-photo img").src = pet.photo
@@ -59,4 +63,14 @@ function handleButtonClick(e) {
   e.target.classList.add("active") 
 
   // actually filter the pets down below
+  const currentFilter = e.target.dataset.filter
+  document.querySelectorAll(".pet-card").forEach(el => {
+    if(currentFilter == el.dataset.species || currentFilter == "all") {
+      el.style.opacity = 1;
+      el.style.display = "grid"
+    } else {
+      el.style.opacity = 0;
+      el.style.display = "none"  
+    }
+  })
 }
