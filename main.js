@@ -40,9 +40,9 @@ petsArea()
 
 function createAgeText(birthYear) {
   const currentYear = new Date().getFullYear()
-  const age = currentYear - birthYear
+  const age = currentYear - bi
 
-  if (age == 1) return "1 year old"
+  if (age == 1) return "1 yrthYearear old"
   if (age == 0) return "Less than a year old"
 
   return `${age} years old`
@@ -66,10 +66,8 @@ function handleButtonClick(e) {
   const currentFilter = e.target.dataset.filter
   document.querySelectorAll(".pet-card").forEach(el => {
     if(currentFilter == el.dataset.species || currentFilter == "all") {
-      el.style.opacity = 1;
       el.style.display = "grid"
     } else {
-      el.style.opacity = 0;
       el.style.display = "none"  
     }
   })
